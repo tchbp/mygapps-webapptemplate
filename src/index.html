@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_self">
+    <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>บันทึกการสอน โรงเรียนหนองวัวซอพิทยาคม</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <link href="https://hrbze4u2btga8q7ynb5v4a-on.drv.tw/Dev/bootstrap-datepicker-thai-thai/css/datepicker.css" rel="stylesheet" media="screen">
+  <script src="https://hrbze4u2btga8q7ynb5v4a-on.drv.tw/Dev/bootstrap-datepicker-thai-thai/js/bootstrap-datepicker.js"></script>
+  <script src="https://hrbze4u2btga8q7ynb5v4a-on.drv.tw/Dev/bootstrap-datepicker-thai-thai/js/bootstrap-datepicker-thai.js"></script>
+  <script src="https://hrbze4u2btga8q7ynb5v4a-on.drv.tw/Dev/bootstrap-datepicker-thai-thai/js/locales/bootstrap-datepicker.th.js"></script>
+ 
+
+
+    <style>  p b {width: 100px ; display: inline-block ;}  </style>
+
+  </head>
+<body>
+<div class="container">
+    <div id="errors" style="color:red;"></div>
+    <div class='jumbotron '>
+
+      <img src='<?= logo ?>' class='float-left' height='200'>
+      <h1>โรงเรียนหนองวัวซอพิทยาคม</h1>
+      <h2>บันทึกการสอน </h2>
+      <h2>ประจำปีการศึกษา 2564</h2>
+      <br>
+    </div>
+
+
+    <br>
+    <footer class="row" style="background-color:rgb(238, 238, 169);">
+     
+        <div class="col-sm-3"></div>
+        <div class="col-sm-9"> <br>
+          <p>โรงเรียนหนองวัวซอพิทยาคม </p>
+          <p>98 หมู่ที่ 5 บ้านโนนหวาย ตำบลโนนหวาย อำเภอหนองวัวซอ</p>
+          <p>จังหวัดอุดรธานี 41220 โทรศัพท์ 0-4229-8660</p>
+        </div>
+      </footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="msgModal" role="dialog">
+  <div class="modal-dialog">
+  
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <p class="modal-title">ข้อความแจ้ง</p>
+      </div>
+      <div class="modal-body" id="msg2usr">
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+<!-- End Modal -->
+<!-- spinModal-->
+<div class="modal fade " id="spinModal">
+  <div class="modal-dialog modal-dialog-centered">
+  <!-- <div class="modal-content"> -->
+   
+     <div class="spinner-border text-success"></div>
+     
+  <!-- </div> -->
+ </div>
+</div>
+<!-- End spinModal-->
+  </div>
+  <script>
+
+    function onspin(e){
+      if(e){
+        $("#spinModal").modal({backdrop: "static"});
+      } else{
+        $("#spinModal").modal("hide");
+      }
+    }
+    function msg2usr(msg) {
+      $("#msg2usr").html("<p>" + msg + "</p>");
+      $("#msgModal").modal();
+    }
+  </script>
+  </body>
+</html>
