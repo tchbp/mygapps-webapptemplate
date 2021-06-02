@@ -4,7 +4,7 @@
     <base target="_self">
     <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>บันทึกการสอน โรงเรียนหนองวัวซอพิทยาคม</title>
+  <title>มอบตัวนักเรียน โรงเรียนหนองวัวซอพิทยาคม</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -32,17 +32,232 @@
 
   </head>
 <body>
-<div class="container">
+<div class="container-sm">
     <div id="errors" style="color:red;"></div>
     <div class='jumbotron '>
 
       <img src='<?= logo ?>' class='float-left' height='200'>
       <h1>โรงเรียนหนองวัวซอพิทยาคม</h1>
-      <h2>บันทึกการสอน </h2>
+      <h2>มอบตัวนักเรียน </h2>
       <h2>ประจำปีการศึกษา 2564</h2>
       <br>
     </div>
+    <div id="contents"  >
+      <form id="frmchkreg">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text bg-primary text-white">กรอกเลขประจำตัวประชาชนของนักเรียนที่ได้สมัครไว้</span>
+        </div>
+        <input type="text" class="form-control" id="regzid" name="regzid" >
+        <input type="button" id="btnchkreg" class="btn-info" onclick="chkreg(this)" value="ค้นหา">
+        
+    </div>
+  </form>
+    <form id="frmhandover" hidden >
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span id="std4frm" class="input-group-text bg-primary text-white">นักเรียน : </span>
+          </div>
+          <input type="hidden" id="stdid" name="stdid">
+          <input type="hidden" id="pref" name="pref">
+          <input type="hidden" id="fname" name="fname">
+          <input type="hidden" id="sname" name="sname">
+          <input type="hidden" id="classr" name="classr">
 
+      </div>
+      <div class="row">
+        <div class="p-2 bg-info text-white col-sm-12">ข้อมูลผู้ปกครอง</div>
+      </div>
+      <br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend ">
+          <span class="input-group-text bg-primary text-white">ชื่อ-สกุล ผู้ปกครอง </span>
+        </div>
+        <input type="text" class="form-control" id="data0" name="data0" >
+        
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">เลขประจำตัวประชาชน </span>
+      </div>
+      <input type="text" class="form-control" id="data1" name="data1" onchange="inzid(this)">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">อาชีพ ผู้ปกครอง  </span>
+      </div>
+      <input type="text" class="form-control" id="data2" name="data2" >
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">ความสัมพันธ์กับนักเรียน </span>
+      </div>
+      <select class="form-control" id="data3" name="data3" onchange="selrela(this)" >
+        <option selected></option>
+        <option value="บิดา">บิดา</option>
+        <option value="มารดา">มารดา</option>
+        <option value="ญาติ">ญาติ</option>
+      </select>
+  </div>
+  <div id="seladdr" class="input-group mb-3">
+    <div class="input-group-prepend">
+    <span class="input-group-text bg-primary text-white" >จังหวัด</span>
+    </div>
+    <select id="data4" name="data4" onchange="selPrv(this)"  class="form-control" placeholder="เลือกจังหวัด">
+      <option selected></option>
+      <?!= province ?>
+    </select>
+    <div class="input-group-prepend ">
+    <span class="input-group-text bg-primary text-white" >อำเภอ</span>
+    </div>
+    <select id="data5" name="data5" onchange="selDist(this)"  class="form-control" >
+      <option selected></option>
+    </select>
+    <div class="input-group-prepend ">
+    <span class="input-group-text bg-primary text-white"  >ตำบล</span>
+    </div>
+    <select id="data6" name="data6"   class="form-control" >
+      <option selected></option>
+    </select></select>
+    
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend ">
+        <span class="input-group-text bg-primary text-white">บ้านเลขที่</span>
+      </div>
+      <input type="text" id="data7" name="data7" class="form-control" placeholder="บ้านเลขที่ หมู่บ้าน">
+      <input type="text" id="data8" name="data8" class="form-control" placeholder="หมู่ที่">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend ">
+        <span class="input-group-text bg-primary text-white">รหัสไปรษณีย์</span>
+      </div>
+      <input type="text" id="data9" name="data9" class="form-control" >
+      <div class="input-group-prepend ">
+        <span class="input-group-text bg-primary text-white">โทรศัพท์</span>
+      </div>
+      <input type="text" id="data10" name="data10" class="form-control" >
+    </div>
+
+    <div class="row">
+      <div class="p-2 bg-info text-white col-sm-12">ข้อมูลนักเรียน</div>
+    </div>
+    <br>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend ">
+        <span class="input-group-text bg-primary text-white">ชื่อ-สกุล นักเรียน </span>
+      </div>
+      <input type="text" class="form-control" id="data11" name="data11" >
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">เลขประจำตัวประชาชน </span>
+      </div>
+      <input type="text" class="form-control" id="data12" name="data12" onchange="inzid(this)">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">วันเกิด (วว/ดด/ปปปป)</span>
+      </div>
+      <input type="text" id="data13" name="data13" class="form-control" data-provide="datepicker" data-date-language="th-th"  >
+      <input type="text" id="data14" name="data14" class="form-control" placeholder="ศาสนา">
+      <input type="text" id="data15" name="data15" class="form-control" placeholder="สัญชาติ">
+      <input type="text" id="data16" name="data16" class="form-control" placeholder="เชื้อชาติ">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">จังหวัดที่เกิด</span>
+      </div>
+      <select class="form-control" id="data17" name="data17" >
+        <option selected></option>
+        <?!= province ?>
+      </select>
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">หมู่เลือด</span>
+      </div>
+      <select class="form-control" id="ิdata18" name="data18" >
+        <option selected></option>
+        <option value="A">A</option>
+        <option value="B">B</option>
+        <option value="AB">AB</option>
+        <option value="O">O</option>
+      </select>
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend ">
+        <span class="input-group-text bg-primary text-white">ชื่อ-สกุล บิดา </span>
+      </div>
+      <input type="text" class="form-control" id="data19" name="data19" >
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">เลขประจำตัวประชาชน </span>
+      </div>
+      <input type="text" class="form-control" id="data20" name="data20" onchange="inzid(this)">
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend ">
+        <span class="input-group-text bg-primary text-white">ชื่อ-สกุล มารดา </span>
+      </div>
+      <input type="text" class="form-control" id="data21" name="data21" >
+      <div class="input-group-prepend">
+        <span class="input-group-text bg-primary text-white">เลขประจำตัวประชาชน </span>
+      </div>
+      <input type="text" class="form-control" id="data22" name="data22" onchange="inzid(this)">
+    </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend ">
+        <span class="input-group-text bg-info text-white">ที่อยู่ปัจจุบัน</span>
+      </div>
+    </div>
+    <div id="seladdr" class="input-group mb-3">
+      <div class="input-group-prepend">
+      <span class="input-group-text bg-primary text-white" >จังหวัด</span>
+      </div>
+      <select id="data23" name="data23" onchange="selPrv(this)"  class="form-control" placeholder="เลือกจังหวัด">
+        <option selected></option>
+        <?!= province ?>
+      </select>
+      <div class="input-group-prepend ">
+      <span class="input-group-text bg-primary text-white" >อำเภอ</span>
+      </div>
+      <select id="data24" name="data24" onchange="selDist(this)"  class="form-control" >
+        <option selected></option>
+      </select>
+      <div class="input-group-prepend ">
+      <span class="input-group-text bg-primary text-white" >ตำบล</span>
+      </div>
+      <select id="data25" name="data25"   class="form-control" >
+        <option selected></option>
+      </select></select>
+      
+      </div>
+      
+      <div class="input-group mb-3">
+        <div class="input-group-prepend ">
+          <span class="input-group-text bg-primary text-white">บ้านเลขที่</span>
+        </div>
+        <input type="text" id="data26" name="data26" class="form-control" placeholder="บ้านเลขที่ หมู่บ้าน">
+        <input type="text" id="data27" name="data27" class="form-control" placeholder="หมู่ที่">
+      </div>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend ">
+          <span class="input-group-text bg-primary text-white">รหัสไปรษณีย์</span>
+        </div>
+        <input type="text" id="data28" name="data28" class="form-control" >
+        <div class="input-group-prepend ">
+          <span class="input-group-text bg-primary text-white">โทรศัพท์</span>
+        </div>
+        <input type="text" id="data29" name="data29" class="form-control" >
+      </div>
+      <div class="d-flex justify-content-end " >
+        <span id="confe"></span>
+      </div>
+      <div class="d-flex justify-content-end ">
+        <button type="button" class="btn btn-outline-warning" onclick="refrm()">เลขประชาชนใหม่</button>
+        <button type="button" class="btn btn-outline-info" id="btnsend" onclick="sendfrm(this)">บันทึก</button>
+      </div>
+
+    </form>
+    </div>
 
     <br>
     <footer class="row" style="background-color:rgb(238, 238, 169);">
@@ -90,6 +305,202 @@
 <!-- End spinModal-->
   </div>
   <script>
+    function canclereg(){
+      $("#data5").val("กุมภวาปี");
+      $("#data3").val("บิดา");
+    }
+    function resetfrm(){
+      $("#frmhandover")[0].reset();
+    }
+    function refrm(){
+      $("#frmhandover")[0].reset();
+      $("#frmhandover").prop("hidden",true);
+      $("#btnsend").prop("disabled",false);
+      $("#frmchkreg").prop("hidden",false);
+      $("#regzid").focus();
+
+    }
+    function zidchk(iPID) {
+      if(iPID.length == 13){
+        var total = 0; 
+        var chk;
+        var valchk;
+        valchk = iPID.substr(12, 1);
+        var j = 0;
+        var pidcut;
+        for (var n = 0; n < 12; n++) {
+            pidcut = parseInt(iPID.substr(j, 1));
+            total = (total + ((pidcut) * (13 - n)));
+            j++;
+        }
+        chk = 11 - (total % 11);
+        if (chk == 10) {
+            chk = 0;
+        } else if (chk == 11) {
+            chk = 1;
+        }
+        if (chk == valchk) {
+            //var strinfo ="ระบุหมายเลขประจำตัวประชาชนถูกต้อง";
+            return true;
+        } else {
+            //var strinfo = "ระบุหมายเลขประจำตัวประชาชนไม่ถูกต้อง";
+            return false;
+        }
+      } else {
+        return false;
+      }
+    }
+    function chkregtest(e){
+      google.script.run.withSuccessHandler(function(stdarr){
+        alert(stdarr);
+      }).chkreg();
+    }
+    function chkreg(e){
+      //alert("chkreg");
+      if(zidchk($("#regzid").val())) {
+        onspin(true);
+        google.script.run.withSuccessHandler(function(stdarr){
+          //alert(JSON.stringify(stdarr));
+          //alert(stdarr);
+          
+          if (stdarr.length >0){
+            $("#stdid").val(stdarr[0]);
+            $("#pref").val(stdarr[1]);
+            $("#fname").val(stdarr[2]);
+            $("#sname").val(stdarr[3]);
+            $("#classr").val(stdarr[4]);
+            $("#std4frm").text(`นักเรียน ${stdarr[1]}${stdarr[2]}  ${stdarr[3]} ชั้น ${stdarr[4]} `);
+            $("#data11").val(`${stdarr[1]}${stdarr[2]}  ${stdarr[3]}`);
+            $("#data12").val(stdarr[5]);
+            $("#frmchkreg").prop("hidden",true);
+            $("#frmhandover").prop("hidden",false);
+            google.script.run.withSuccessHandler(hov2frm)
+                              .chkHov(stdarr[5]);
+          } else {
+            msg2usr("ไม่พบการลงทะเบียนเลขประชาชนนี้");
+          }
+          onspin(false);
+        }).chkreg($("#regzid").val());
+      } else {
+        alert("โปรดตรวจสอบเลขประชาชนให้ถูกต้อง");
+
+      }
+    }
+    function hov2frm(hovobj){
+      //alert(JSON.stringify(stdarr));
+      //alert(stdarr["hov0"]);
+      let stdarr = hovobj["hov[]"];
+      if (stdarr != null){
+        msg2usr("ได้มีการยื่นเอกสารแล้ว หากต้องการแก้ไขโปรดติดต่อ admin")
+        $("#btnsend").prop("disabled",true);
+        $("#data5").empty().append(`<option selected></option><option >${stdarr[10]}</option>`);
+        $("#data6").empty().append(`<option selected></option><option  >${stdarr[11]}</option>`);
+        $("#data24").empty().append(`<option selected></option><option  >${stdarr[29]}</option>`);
+        $("#data25").empty().append(`<option selected></option><option  >${stdarr[30]}</option>`);
+        for (i = 0;i <= 29; i++){
+          $("#data" + i).val(stdarr[i+5]);
+        }
+      } else {
+        $("#btnsend").prop("disabled",false);
+      }
+      onspin(false);
+    }
+    function inzid(e){
+      if(!(zidchk($(e).val()))){
+        alert("เลขประจำตัวประชาชนไม่ถูกต้อง โปรดกรอกข้อมูลใหม่");
+        $(e).val("").focus();
+      }
+    }
+    function selrela(e){
+      if($(e).val() == "บิดา"){
+        $("#data19").val($("#data0").val());
+        $("#data20").val($("#data1").val());
+      } else if($(e).val() == "มารดา"){
+        $("#data21").val($("#data0").val());
+        $("#data22").val($("#data1").val());
+      }
+    }
+    function selPrv(e){
+      var prv = $(e).val();
+      var nextsel = `data${parseInt($(e).prop("name").substr(4)) + 1}`;
+      $(`#data${parseInt($(e).prop("name").substr(4)) + 2}`).empty();
+      onspin(true);
+      google.script.run.withSuccessHandler(function(distarr,mysel){
+                          $(mysel).empty();
+                          $(mysel).append(`<option selected></option>`);
+                          for (const dist of distarr){
+                            $(mysel).append(`<option value="${dist}">${dist}</option>`);
+                          }
+                          onspin(false);
+                        })
+                        .withUserObject($(`#${nextsel}`))
+                        .getdist(prv);
+
+    }
+    function selDist(e){
+      var dist = $(e).val();
+      var nextsel = `data${parseInt($(e).prop("name").substr(4)) + 1}`;
+      onspin(true);
+      google.script.run.withSuccessHandler(function(tbarr,mysel){
+                          $(mysel).empty();
+                          $(mysel).append(`<option selected></option>`);
+                          for (const tb of tbarr){
+                            $(mysel).append(`<option value="${tb}">${tb}</option>`);
+                          }
+                          onspin(false);
+                        })
+                        .withUserObject($(`#${nextsel}`))
+                        .gettumbol(dist);
+    }
+    function sendfrm(e){
+
+      let strconfe = "";
+        if($(e).text() == "บันทึก") {
+          strconfe = `ข้าพเจ้า<strong> ${$("#data0").val()} </strong>รับรองว่า ข้าพเจ้าเป็นผู้ปกครองของ<strong> ${$("#data11").val()} </strong>          
+          ขออุปถัมภ์ด้านอุปกรณ์การศึกษาและ ค่าใช้จ่ายทั้งปวงเพื่อการศึกษาเล่าเรียน ทั้งจะควบคุมดูแลนักเรียนให้ศึกษาเล่าเรียนอย่างสม่ำเสมอ 
+          ให้เป็นคนสุภาพ เรียบร้อยและปฏิบัติตามระเบียบข้อบังคับของโรงเรียนทุกประการ และข้อมูลข้างต้นนี้ถูกต้องเป็นจริงทุกประการ 
+          หากมีการเปลี่ยนแปลงแก้ไข ข้าพเจ้าจะนำหลักฐานมาประกอบการพิจารณาแก้ไขให้เรียบร้อยโดยเร็ว`;
+          $("#confe").html(strconfe).prop("hidden",false);
+          $(e).text("ยืนยัน");
+        } else {
+          $("#confe").html("").prop("hidden",true);
+          $(e).text("บันทึก").prop("disabled",true);
+          let frmarr = $("#frmhandover").serializeArray();
+          let obj2get = {};
+          $.each(frmarr,function(i,field){
+            obj2get[field.name] = field.value;
+          });
+          google.script.run.withSuccessHandler(sendsuccess)
+                        .onSendFrm(obj2get);
+        }
+    }
+    function sendsuccess(){
+      resetfrm();
+      $("#btnsend").prop("disabled",false);
+      $("#frmhandover").prop("hidden",true);
+      $("#frmchkreg").prop("hidden",false);
+      msg2usr("ยื่นฟอร์มมอบตัวแล้ว")
+      //alert("ยื่นฟอร์มมอบตัวแล้ว");
+    }
+    function sendfrmTes(e){
+      let frmarr = $("#frmhandover").serializeArray();
+      alert(JSON.stringify(frmarr));
+      let obj2get = {};
+      $.each(frmarr,function(i,field){
+        obj2get[field.name] = field.value;
+      });
+      alert(JSON.stringify(obj2get));
+      let dataobj = {};
+      $.each($(`[name*='data']`),function(i,field){
+        dataobj[field.name] = $(field).val();
+      });
+      alert(JSON.stringify(dataobj));
+      let strspan = "";
+      $.each($("span"),function (i,field){
+        strspan += $(field).html() + "\n";
+      })
+      alert(strspan);
+    }
 
     function onspin(e){
       if(e){
